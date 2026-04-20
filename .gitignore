@@ -1,0 +1,12 @@
+# Ignore everything
+*
+
+# Don't ignore directories
+!*/
+
+# Whitelist exactly what you requested
+!pipeline_notebook_yolo_4.ipynb
+!dataset.ipynb
+
+# Don't ignore gitignore itself
+!.gitignore
