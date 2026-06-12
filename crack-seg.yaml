@@ -1,0 +1,11 @@
+
+path: /Users/adityagk/Desktop/UniRGV_internship/cv_pipeline_pinn/datasets/crack-seg
+
+train: images/train
+val: images/val
+test: images/test
+
+names:
+  0: crack
+
+download: https://github.com/ultralytics/assets/releases/download/v0.0.0/crack-seg.zip

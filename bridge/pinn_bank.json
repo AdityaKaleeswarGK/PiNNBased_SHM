@@ -1,0 +1,43 @@
+{
+  "created": "2026-06-12T12:38:10",
+  "epochs": 6000,
+  "reference": {
+    "W_mm": 100.0,
+    "H_half_mm": 50.0,
+    "sigma_MPa": 100.0
+  },
+  "entries": [
+    {
+      "a_over_W": 0.05,
+      "F_param": 1.1113,
+      "F_J": 1.1492,
+      "F_williams": 1.1196,
+      "F_tada": 1.1343,
+      "dev_vs_tada_pct": 2.03
+    },
+    {
+      "a_over_W": 0.1,
+      "F_param": 1.1729,
+      "F_J": 1.2336,
+      "F_williams": 1.1821,
+      "F_tada": 1.1857,
+      "dev_vs_tada_pct": 1.08
+    },
+    {
+      "a_over_W": 0.2,
+      "F_param": 1.3598,
+      "F_J": 1.4161,
+      "F_williams": 1.3664,
+      "F_tada": 1.3727,
+      "dev_vs_tada_pct": 0.94
+    },
+    {
+      "a_over_W": 0.3,
+      "F_param": 1.6426,
+      "F_J": 1.6602,
+      "F_williams": 1.642,
+      "F_tada": 1.6621,
+      "dev_vs_tada_pct": 1.17
+    }
+  ]
+}

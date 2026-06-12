@@ -1,12 +1,17 @@
-# Ignore everything
-*
+# Data, outputs, references — not tracked
+datasets/
+output/
+papers/
+test_images/
 
-# Don't ignore directories
-!*/
+# Model weights (best-2.pt, mobile_sam.pt, anything downloaded)
+*.pt
 
-# Whitelist exactly what you requested
-!pipeline_notebook_yolo_4.ipynb
-!dataset.ipynb
+# PINN_backend is its own repo (github.com/AdityaKaleeswarGK/PiNNBased_SHM)
+PINN_backend/
 
-# Don't ignore gitignore itself
-!.gitignore
+# Python / notebook cruft
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.DS_Store

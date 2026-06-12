@@ -1,0 +1,10 @@
+# CV pipeline
+ultralytics>=8.2
+opencv-python>=4.9
+scikit-image>=0.22
+scipy>=1.11
+numpy>=1.26
+matplotlib>=3.8
+
+# PINN backend
+torch>=2.2
