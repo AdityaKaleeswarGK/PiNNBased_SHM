@@ -6,7 +6,7 @@ test_images/
 
 # Model weights (best-2.pt, mobile_sam.pt, anything downloaded)
 *.pt
-
+*.yaml
 # PINN_backend is its own repo (github.com/AdityaKaleeswarGK/PiNNBased_SHM)
 PINN_backend/
 

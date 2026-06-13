@@ -30,20 +30,36 @@ ratio) and every detected crack afterwards evaluates in microseconds.
 |---|---|
 | `pipeline_notebook_yolo_4.ipynb` | Full CV pipeline with all visualisations (research notebook) |
 | `dataset.ipynb` | YOLO-seg training on the `crack-seg` dataset |
-| `best-2.pt` | Trained YOLO segmentation weights |
+| `best-2.pt` | YOLO-seg crack weights — **not shipped; bring your own** (or pass `--weights`) |
 | `PINN_backend/PINN_FINAL_WALLAHI.ipynb` | Validated Mode-I PINN (hardcoded geometry, plane stress) |
 | `PINN_backend/pinn_strain.ipynb` | Plane-strain variant |
 | `PINN_backend/PINN.ipynb` | Earlier Bayesian-dropout PINN experiment |
 | `bridge/` | **The glue** — headless CV, plugins, parameterised PINN |
 | `bridge/detectors.py` | Detector plugins: ultralytics-seg/-box, torchvision (SSD/RCNN), classical |
 | `bridge/depth_sources.py` | Scale plugins: manual, reference, standoff, depth camera file, monocular (Depth Anything V2) |
-| `run_end_to_end.py` | One-command pipeline |
+| `run_end_to_end.py` | One-command pipeline (single image → reports) |
+| `setup_models.py` | One-time setup: installs deps, fetches MobileSAM + Depth Anything V2 |
+| `capture_analyze.py` | Live capture → full pipeline → annotated 6-panel result figure |
+| `live_demo.py` | Continuous live severity overlay (webcam / iPhone Continuity Camera) |
+| `surface_depth_test.py` | Standalone surface + depth + SAM probe (no crack logic) |
 
 ## Run it
 
-```bash
-pip install -r requirements.txt
+**First time (fresh clone):**
 
+```bash
+# installs requirements.txt + downloads MobileSAM (~39 MB) and
+# Depth Anything V2 (~100 MB); both cache and never re-download
+python setup_models.py
+
+# bring your own YOLO-seg crack weights — NOT included in the repo.
+# put them in the repo root as best-2.pt, or pass --weights to any run script.
+```
+
+`mobile_sam.pt` and Depth Anything V2 download automatically; `best-2.pt`
+(the crack detector) is your own trained model and must be supplied.
+
+```bash
 # one-time, offline: train the F(a/W) reference bank (~75 min for 4 ratios)
 python -m bridge.build_bank --ratios 0.05 0.1 0.2 0.3 --epochs 6000
 
@@ -51,11 +67,15 @@ python -m bridge.build_bank --ratios 0.05 0.1 0.2 0.3 --epochs 6000
 python run_end_to_end.py test_images/your_image.jpg \
     --mm-per-pixel 0.25 --sigma-mpa 2.0 --member-width-mm 1000
 
+# live capture: space/c freezes a frame → 6-panel figure (segmentation,
+# skeleton, severity + load dir, SAM surface + W line, depth, metrics table)
+python capture_analyze.py --camera 0 --sigma-mpa 2.0 --focal-px 1400
+
+# continuous live overlay from a webcam / iPhone Continuity Camera (~3 fps)
+python live_demo.py --camera 0 --depth monocular --focal-px 1450 --sigma-mpa 2.0
+
 # optional cross-check: full PINN solve on the worst crack (~18 min)
 python run_end_to_end.py ... --validate-pinn
-
-# live demo from a webcam / iPhone Continuity Camera (~3 fps):
-python live_demo.py --camera 0 --depth monocular --focal-px 1450 --sigma-mpa 2.0
 ```
 
 Without the bank, F(a/W) falls back to the Tada handbook polynomial — the

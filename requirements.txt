@@ -8,3 +8,8 @@ matplotlib>=3.8
 
 # PINN backend
 torch>=2.2
+
+# Monocular depth (Depth Anything V2) — used by --depth monocular,
+# capture_analyze.py and surface_depth_test.py
+transformers>=4.40
+pillow>=10.0
