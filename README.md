@@ -188,20 +188,3 @@ W should come from measurement, not the crack. Three tiers, fallback order:
    synthetic beam: W = 198 px vs truth 200, correct edge/center/clipped
    classification. Requires perspective rectification for skewed views.
    Tolerance is friendly: ~10% W error ≈ only 2–4% K error at small a/W.
-3. **Survey** — COLMAP SfM over an overlapping sweep + ONE scale anchor
-   (taped distance / marker / depth estimate) → metric 3D of the member;
-   W, crack atlas, and growth monitoring all come from the same
-   reconstruction. COLMAP gives geometry, not semantics — SAM still labels
-   which plane is the member. Offline, post-survey.
-
-## Known gaps / next steps
-
-- [x] ~~Depth model for automatic mm_per_pixel~~ — done: `--depth monocular`
-  (Depth Anything V2) and `--depth depth-file` (depth camera) plugins
-- [ ] Interacting crack pairs get flagged but still use isolated-crack K;
-  a true two-crack PINN domain is the research-grade fix
-- [ ] K_II uses the centre-crack resolved-stress form with the edge-crack F
-  as an approximation; a Mode-II Williams term in the PINN would do it properly
-- [ ] YOLO recall unquantified — run `model.val()` on the test split
-- [ ] Plane stress vs plane strain decision for thick members
-  (`pinn_strain.ipynb` has the plane-strain variant)
