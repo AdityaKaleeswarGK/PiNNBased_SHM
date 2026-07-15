@@ -363,16 +363,3 @@ needs three physical inputs that no camera can provide on its own:
   empirical confirmation that the train-once bank applies at any size
 - The J-integral extraction runs 2–6% off param/Williams throughout — the
   noisiest of the three; param is the value the bank stores
-
-## Agreed design: acquiring W (member width)
-
-W should come from measurement, not the crack. Three tiers, fallback order:
-
-1. **No context** — assumption prior (current `W = 5a` default, pins
-   a/W = 0.2). Honest upgrade planned: report K as a range over
-   F(a/W→0)..F(0.3) instead of a silent point value.
-2. **Context shot — IMPLEMENTED (`--member auto`)** — step back so the
-   member's edges are in frame; MobileSAM measures W per crack (see the
-   CV section above). Validated on a synthetic beam: W = 198 px vs truth
-   200, correct edge/center/clipped classification. Requires perspective
-   rectification for skewed views.
